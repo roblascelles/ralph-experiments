@@ -17,4 +17,4 @@ services:
       - PYTHONUNBUFFERED=1
       - GH_TOKEN=${GH_TOKEN}
     # This keeps the container alive so you can exec into it
-    command: /bin/bash -c "gh extension install github/gh-copilot 2>/dev/null || true; tmux new-session -s ralph_loop 'echo Ralph Sandbox Ready!; /bin/bash'"
+    command: /bin/bash -c "tmux new-session -s ralph_loop 'echo Ralph Sandbox Ready!; /bin/bash'"
