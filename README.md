@@ -1,6 +1,8 @@
 
 # Ralph Experiments
 
+Attempting to build a simple application via the [Ralph Wiggum](https://ghuntley.com/ralph/) flow.
+
 ## Using copilot cli from container
 
 Install GH CLI locally : https://cli.github.com/

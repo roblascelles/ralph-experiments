@@ -7,7 +7,9 @@ services:
     tty: true
     volumes:
       # Mount your current project folder into the sandbox
-      - .:/home/ralph/workspace
+      - ./workspace:/home/ralph/workspace
+      # Mount Docker socket for Docker-from-Docker
+      - /var/run/docker.sock:/var/run/docker.sock
     deploy:
       resources:
         limits:

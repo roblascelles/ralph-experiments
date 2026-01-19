@@ -25,11 +25,20 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     && apt-get update \
     && apt-get install -y gh
 
-# 4. Install GitHub Copilot CLI globally
+# 4. Install Docker CLI
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bookworm stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update \
+    && apt-get install -y docker-ce-cli docker-compose-plugin
+
+# 5. Install GitHub Copilot CLI globally
 RUN npm i -g @github/copilot
 
-# 5. Set up a non-root user 'ralph' for security
-RUN useradd -m -s /bin/bash ralph && echo "ralph ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# 6. Set up a non-root user 'ralph' for security
+RUN groupadd -g 999 docker || true \
+    && useradd -m -s /bin/bash ralph \
+    && echo "ralph ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && usermod -aG docker ralph
 USER ralph
 WORKDIR /home/ralph/workspace
 
