@@ -3,6 +3,35 @@
 ---
 *This file gets updated when Ralph discovers better ways to build/test/run the project.*
 
+## Known Issues & Gotchas
+
+### Docker Permission Issues
+- **Issue**: On some systems, Docker requires sudo to run
+- **Solution**: Commands in this guide may need `sudo` prefix (e.g., `sudo docker compose up -d`)
+- **Better Fix**: Add your user to the docker group and restart your session
+
+### LocalStack Volume Mount Issues
+- **Issue**: Bind mounts (e.g., `./localstack:/var/lib/localstack`) can fail on Docker Desktop
+- **Error**: "mounts denied: The path /home/user/workspace/localstack is not shared from the host"
+- **Solution**: Use named volumes instead: `localstack-data:/var/lib/localstack`
+- **Applied**: docker-compose.yml uses named volumes for both LocalStack and OpenSearch
+
+### Service Startup Timing
+- **Issue**: Services need time to fully initialize
+- **LocalStack**: Takes ~20-30 seconds to become "Ready"
+- **OpenSearch**: Takes ~30-40 seconds to reach GREEN status
+- **Solution**: Add `sleep 30-40` after `docker compose up -d` before testing
+
+### Port Access from Host
+- **Issue**: Ports (4566, 9200) may not be immediately accessible from host machine
+- **Workaround**: Use `docker exec` to run commands inside containers
+- **Example**: `sudo docker exec opensearch-reindex-localstack curl http://localhost:4566/_localstack/health`
+
+### OpenSearch Index Creation Race Condition
+- **Issue**: Newly created index may return 404 immediately after creation
+- **Reason**: Eventual consistency - index needs a moment to be fully available
+- **Solution**: Add small delay (1-2 seconds) after index creation before querying
+
 ## Development Strategy
 
 ### LocalStack-First Development

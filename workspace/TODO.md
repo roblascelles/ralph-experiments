@@ -1,13 +1,13 @@
 # TODO List
 
 ## Phase 0: Docker Environment Setup
-- [ ] Create `docker-compose.yml` with LocalStack service
-- [ ] Configure LocalStack with required services (S3, Lambda, StepFunctions, EventBridge, IAM, CloudWatch)
-- [ ] Add local OpenSearch 2.x container to `docker-compose.yml`
-- [ ] Add `awslocal` CLI alias for LocalStack interactions
-- [ ] Document LocalStack endpoints and access in AGENTS.md
-- [ ] Test environment is running (`docker compose up -d`)
-- [ ] Verify OpenSearch connectivity (index a test document)
+- [x] Create `docker-compose.yml` with LocalStack service
+- [x] Configure LocalStack with required services (S3, Lambda, StepFunctions, EventBridge, IAM, CloudWatch)
+- [x] Add local OpenSearch 2.x container to `docker-compose.yml`
+- [x] Add `awslocal` CLI alias for LocalStack interactions
+- [x] Document LocalStack endpoints and access in AGENTS.md
+- [x] Test environment is running (`docker compose up -d`)
+- [x] Verify OpenSearch connectivity (index a test document)
 
 ## Phase 1: Project Setup
 - [ ] Create directory structure (src, tests, terraform, examples, terraform/environments)
