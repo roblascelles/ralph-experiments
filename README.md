@@ -26,3 +26,7 @@ connect to agent (-CC for tmux integration with iTerm2)
 docker exec -it ralph_sandbox tmux -CC attach -t ralph_loop
 ```
 
+run ralph loop in container:
+```
+./ralph.sh
+```
