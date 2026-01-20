@@ -8,9 +8,10 @@ services:
     volumes:
       # Mount your current project folder into the sandbox
       - ../workspace:/home/ralph/workspace
+      # Mount ralph.sh into the workspace
+      - ./ralph.sh:/home/ralph/workspace/ralph.sh:ro
       # Mount Docker socket for Docker-from-Docker
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./ralph.sh:/home/ralph/ralph.sh:ro  # Mount single file as read-only
     deploy:
       resources:
         limits:
